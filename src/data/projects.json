@@ -1,0 +1,22 @@
+[
+  {
+    "id": "finance-dashboard",
+    "title": "Finance Dashboard",
+    "category": "Web Application",
+    "description": "A high-performance financial dashboard handling real-time data.",
+    "techStack": ["Vue 3", "TypeScript", "Pinia", "Tailwind"],
+    "image": "/images/finance-thumb.jpg",
+    "link": "https://github.com/yourname/finance-app",
+    "featured": true
+  },
+  {
+    "id": "ecommerce-api",
+    "title": "Headless E-Commerce API",
+    "category": "Backend System",
+    "description": "Scalable Node.js REST API serving 10k+ daily requests.",
+    "techStack": ["Node.js", "Express", "PostgreSQL", "Docker"],
+    "image": "/images/api-thumb.jpg",
+    "link": "https://github.com/yourname/ecommerce-api",
+    "featured": true
+  }
+]
