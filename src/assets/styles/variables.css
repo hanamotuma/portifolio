@@ -1,0 +1,31 @@
+:root {
+  --color-bg: #101114;
+  --color-surface: #191B20;
+  --color-accent: #D82035;
+  --color-text: #F2F0ED;
+  --color-muted: #8A8D94;
+  --color-border: #26292F;
+
+  --font-heading: 'Space Grotesk', 'Sora', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --max-width: 1400px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+}
+
+:root[data-theme='light'] {
+  --color-bg: #F2F0ED;
+  --color-surface: #FFFFFF;
+  --color-text: #101114;
+  --color-muted: #5A5D64;
+  --color-border: #D9D5CF;
+}
