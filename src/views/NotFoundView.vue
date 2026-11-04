@@ -1,10 +1,12 @@
+<script setup lang="ts"></script>
+
 <template>
-  <section class="section min-h-[60vh] flex items-center">
-    <div class="container-content text-center">
-      <p class="technical-label mb-4">Error 404</p>
-      <h1 class="hero-title text-6xl md:text-8xl mb-4">Not Found</h1>
-      <p class="text-muted mb-8">The page you're looking for doesn't exist.</p>
-      <RouterLink to="/" class="btn btn-primary">Back home</RouterLink>
+  <section class="section">
+    <div class="container-content py-16 text-center">
+      <p class="technical-label">404</p>
+      <h1 class="mt-3 font-heading text-5xl font-bold">Page not found</h1>
+      <p class="mt-4 text-muted">The page you're looking for doesn't exist or has moved.</p>
+      <RouterLink to="/" class="btn btn-primary mt-8">Back home</RouterLink>
     </div>
   </section>
 </template>

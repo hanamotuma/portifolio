@@ -1,54 +1,30 @@
-<script setup>
-import { ArrowUpRight, Github } from 'lucide-vue-next';
+<script setup lang="ts">
+import type { Project } from '@/types/project'
 
-defineProps({
-  project: {
-    type: Object,
-    required: true
-  }
-});
+defineProps<{ project: Project }>()
 </script>
 
 <template>
-  <div class="group relative overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-zinc-600 transition-all duration-300">
-    <!-- Image Container -->
-    <div class="aspect-video overflow-hidden bg-zinc-800">
-      <img 
-        :src="project.image" 
-        :alt="project.title" 
-        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-      />
-    </div>
-    
-    <!-- Content -->
-    <div class="p-6">
-      <div class="flex justify-between items-start mb-4">
-        <div>
-          <p class="text-sm text-zinc-400 font-medium mb-1">{{ project.category }}</p>
-          <h3 class="text-2xl font-bold text-white">{{ project.title }}</h3>
-        </div>
-        <div class="flex gap-3">
-          <a :href="project.link" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
-            <Github class="w-5 h-5" />
-          </a>
-          <a :href="project.link" target="_blank" class="text-zinc-400 hover:text-white transition-colors">
-            <ArrowUpRight class="w-5 h-5" />
-          </a>
-        </div>
+  <RouterLink
+    :to="{ name: 'project-detail', params: { slug: project.slug } }"
+    class="card group flex flex-col overflow-hidden"
+  >
+    <div class="relative aspect-video bg-gradient-to-br from-surface via-bg to-surface">
+      <div class="absolute inset-0 flex items-center justify-center">
+        <span class="technical-label">{{ project.category }}</span>
       </div>
-      
-      <p class="text-zinc-400 mb-6 line-clamp-2">{{ project.description }}</p>
-      
-      <!-- Tech Stack Badges -->
-      <div class="flex flex-wrap gap-2">
-        <span 
-          v-for="tech in project.techStack" 
-          :key="tech"
-          class="px-3 py-1 text-xs font-medium bg-zinc-800 text-zinc-300 rounded-full border border-zinc-700"
-        >
-          {{ tech }}
-        </span>
+      <span class="absolute right-4 top-4 text-xs text-muted">{{ project.year }}</span>
+    </div>
+
+    <div class="flex flex-1 flex-col p-6">
+      <h3 class="font-heading text-lg font-semibold text-text group-hover:text-accent transition-colors">
+        {{ project.title }}
+      </h3>
+      <p class="mt-2 flex-1 text-sm text-muted">{{ project.summary }}</p>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span v-for="tech in project.technologies" :key="tech" class="tag">{{ tech }}</span>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>

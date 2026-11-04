@@ -1,36 +1,52 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
+import ProjectCard from '@/components/ProjectCard.vue'
 import { projects } from '@/data/projects'
-import ProjectFilter from '@/components/projects/ProjectFilter.vue'
-import ProjectGrid from '@/components/projects/ProjectGrid.vue'
 import type { ProjectCategory } from '@/types/project'
 
-const category = ref<ProjectCategory | 'all'>('all')
-const query = ref('')
+type Filter = 'all' | ProjectCategory
 
-const filtered = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  return projects.filter((p) => {
-    const matchesCat = category.value === 'all' || p.category === category.value
-    const matchesQuery =
-      !q ||
-      p.title.toLowerCase().includes(q) ||
-      p.summary.toLowerCase().includes(q) ||
-      p.technologies.some((t) => t.toLowerCase().includes(q))
-    return matchesCat && matchesQuery
-  })
-})
+const filters: { label: string; value: Filter }[] = [
+  { label: 'All', value: 'all' },
+  { label: 'Full-stack', value: 'full-stack' },
+  { label: 'Backend', value: 'backend' },
+  { label: 'Frontend', value: 'frontend' },
+  { label: 'Data', value: 'data' }
+]
+
+const active = ref<Filter>('all')
+
+const filtered = computed(() =>
+  active.value === 'all' ? projects : projects.filter((p) => p.category === active.value)
+)
 </script>
 
 <template>
   <section class="section">
     <div class="container-content">
-      <p class="technical-label mb-4">Projects</p>
-      <h1 class="hero-title text-4xl md:text-6xl mb-3">All Projects</h1>
-      <p class="text-muted mb-10">{{ projects.length }} projects · full-stack, data and frontend work.</p>
+      <p class="technical-label">Portfolio</p>
+      <h1 class="mt-3 font-heading text-4xl font-bold md:text-5xl">Projects</h1>
+      <p class="mt-4 max-w-xl text-muted">
+        Full-stack applications and data projects built across university and independent work.
+      </p>
 
-      <ProjectFilter v-model="category" v-model:query="query" />
-      <ProjectGrid :projects="filtered" />
+      <div class="mt-8 flex flex-wrap gap-2">
+        <button
+          v-for="filter in filters"
+          :key="filter.value"
+          type="button"
+          class="btn"
+          :class="active === filter.value ? 'btn-primary' : 'btn-ghost'"
+          @click="active = filter.value"
+        >
+          {{ filter.label }}
+        </button>
+      </div>
+
+      <div v-if="filtered.length" class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <ProjectCard v-for="project in filtered" :key="project.id" :project="project" />
+      </div>
+      <p v-else class="mt-8 text-muted">No projects in this category yet.</p>
     </div>
   </section>
 </template>
