@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hanamotuma.vercel.app/sitemap.xml
